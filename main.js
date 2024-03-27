@@ -15,7 +15,7 @@ let btn2 = document.getElementById("btn2");
 //Variable para mostrar el contenido del local storage
 let p = document.querySelector("p");
 let keys = Object.keys(localStorage);
-
+console.log(keys);
 function data_form(e) {
 //   e.preventDefault();
   let name_form = name.value;
