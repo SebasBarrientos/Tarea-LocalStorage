@@ -14,9 +14,10 @@ let btn1 = document.getElementById("btn1");
 let btn2 = document.getElementById("btn2");
 //Variable para mostrar el contenido del local storage
 let p = document.querySelector("p");
+let keys = Object.keys(localStorage);
 
 function data_form(e) {
-  e.preventDefault();
+//   e.preventDefault();
   let name_form = name.value;
   let email_form = email.value;
   let texto_form = texto.value;
@@ -27,28 +28,31 @@ function data_form(e) {
 }
 // Hasta aca el objeto guardado
 
-let arr = [];
-btn1.addEventListener("click", data_form);
-
-function print_user(params) {
+function print_user() {
   p.innerText = "";
-  for (let i = 1; i <= localStorage.length; i++) {
-    let contenido_localStorage = JSON.parse(localStorage.getItem("User" + [i]));
-    console.log(contenido_localStorage);
-    if (contenido_localStorage == null) {
-      contenido_localStorage = { Nombre: "Usuario_Eliminado" };
-      p.innerHTML += "<p>" + contenido_localStorage.Nombre + "</p>";
-    } else {
-      p.innerHTML += "<p>" + contenido_localStorage.Nombre + "</p>";
-    }
-    console.log(localStorage.length);
-      
-
+  for (const clave of keys) {
+    let obj_localStorage = JSON.parse(localStorage.getItem(clave));
+    p.innerHTML += "<p>" + clave + ": " + obj_localStorage.Nombre + "</p>";
   }
 }
 
-print_user();
+btn1.addEventListener("click", data_form);
+//la funcion a continuacion es un error de querer iterar las claves a traves de el length. Esto provocava que I al dar null me ocupe 1 de las iteraciones y por ende no me mostraba todo el contenido del localStorage
+// function print_user() {
+//   p.innerText = "";
+//   for (let i = 1; i <= localStorage.length; i++) {
+//     let contenido_localStorage = JSON.parse(localStorage.getItem("User" + [i]));
+//     console.log(i);
+//     if (contenido_localStorage == null) {
+//         contenido_localStorage = { Nombre: "Usuario_Eliminado" };
+//         p.innerHTML += "<p>" + contenido_localStorage.Nombre + "</p>";
+//     } else {
+//         p.innerHTML += "<p>" + contenido_localStorage.Nombre + "</p>";
+//     };
+//   }
+// }
 
+print_user();
 function remover(e) {
   let x = prompt("Dime el numero de usuario que deseas remover");
   localStorage.removeItem("User" + x);
