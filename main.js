@@ -43,7 +43,7 @@ function print_user(params) {
     }
     console.log(localStorage.length);
       
-x
+
   }
 }
 
